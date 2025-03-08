@@ -1,0 +1,37 @@
+<div class="container">
+  <h2>Prédiction du Défaut de Paiement</h2>
+
+  <form (submit)="submitForm()">
+    <label>Revenu Mensuel: <input type="number" [(ngModel)]="clientData.Revenu_Mensuel" [ngModelOptions]="{standalone: true}"></label>
+    <label>Montant Crédit: <input type="number" [(ngModel)]="clientData.Montant_Credit" [ngModelOptions]="{standalone: true}"></label>
+    <label>Durée Crédit: <input type="number" [(ngModel)]="clientData.Duree_Credit" [ngModelOptions]="{standalone: true}"></label>
+    <label>Âge: <input type="number" [(ngModel)]="clientData.Age" [ngModelOptions]="{standalone: true}"></label>
+    <label>Statut Emploi: 
+      <select [(ngModel)]="clientData.Statut_Emploi" [ngModelOptions]="{standalone: true}">
+        <option value="CDI">CDI</option>
+        <option value="CDD">CDD</option>
+        <option value="Indépendant">Indépendant</option>
+        <option value="Chômeur">Chômeur</option>
+      </select>
+    </label>
+    <label>Nombre Total de Crédits: <input type="number" [(ngModel)]="clientData.Nbr_Total_Credits" [ngModelOptions]="{standalone: true}"></label>
+    <label>Crédits Payés: <input type="number" [(ngModel)]="clientData.Nbr_Credits_Payes" [ngModelOptions]="{standalone: true}"></label>
+    <label>Crédits Non Payés: <input type="number" [(ngModel)]="clientData.Nbr_Credits_NonPayes" [ngModelOptions]="{standalone: true}"></label>
+    
+    <button type="submit">Prédire</button>
+  </form>
+  
+  <div *ngIf="result">
+    <h3>Résultat :</h3>
+    <p><strong>Pondérations:</strong></p>
+    <ul>
+      <li *ngFor="let key of getKeys(result.Ponderations)">
+        {{ key }} : {{ result.Ponderations[key] }}
+      </li>
+    </ul>
+    <p><strong>Score Global:</strong> {{ result.Score_Global }}</p>
+    <p><strong>Historique Crédit:</strong> {{ result.Historique_Credit }}</p>
+    <p><strong>Défaut de Paiement:</strong> {{ result.Defaut_Paiement }}</p>
+    <p><strong>Décision:</strong> {{ result.Decision_Credit }}</p>
+  </div>
+  
