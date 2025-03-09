@@ -12,33 +12,30 @@ import { FormsModule } from '@angular/forms';
 })
 export class PredictionComponent {
 
-  client = {
-    revenuMensuel: '',
-    montantCredit: '',
-    dureeCredit: '',
-    age: '',
-    statutEmploi: '',
-    nbrTotalCredits: '',
-    nbrCreditsPayes: ''
+  formData = {
+    Age: '',
+    Revenu_Mensuel: '',
+    Montant_Credit: '',
+    Duree_Credit: '',
+    Statut_Emploi: 'CDI',
+    Nbr_Total_Credits: '',
+    Nbr_Credits_Payes: '',
+    Nbr_Credits_NonPayes: ''
   };
 
-  decision: string | null = null;
-  errorMessage: string | null = null;
+  result: any = null;
 
   constructor(private http: HttpClient) {}
 
-  envoyerDonnees() {
-    this.http.post<any>('http://localhost:5000/predict', this.client)
-      .subscribe(
-        response => {
-          this.decision = response.decision;
-          this.errorMessage = null;
-        },
-        error => {
-          this.errorMessage = 'Erreur lors de la communication avec le serveur';
-          this.decision = null;
-        }
-      );
+  onSubmit() {
+    this.http.post('http://localhost:5000/predict', this.formData).subscribe(
+      (response) => {
+        this.result = response;
+      },
+      (error) => {
+        console.error('Erreur lors de la requête API', error);
+      }
+    );
   }
 
 }

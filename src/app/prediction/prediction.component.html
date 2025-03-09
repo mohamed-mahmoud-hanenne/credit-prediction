@@ -1,46 +1,43 @@
+<!-- formulaire.component.html -->
 <div class="container">
-  <h2>Simulation de Décision de Crédit</h2>
-  <form (submit)="envoyerDonnees()">
-    <div class="form-group">
-      <label>Revenu Mensuel:</label>
-      <input type="number" [(ngModel)]="client.revenuMensuel" name="revenu" required>
-    </div>
+  <h2>Simulation de Crédit</h2>
+  <form (ngSubmit)="onSubmit()">
+    <label>Age:</label>
+    <input type="number" [(ngModel)]="formData.Age" name="Age" required>
     
-    <div class="form-group">
-      <label>Montant du Crédit:</label>
-      <input type="number" [(ngModel)]="client.montantCredit" name="montant" required>
-    </div>
+    <label>Revenu Mensuel:</label>
+    <input type="number" [(ngModel)]="formData.Revenu_Mensuel" name="Revenu_Mensuel" required>
     
-    <div class="form-group">
-      <label>Durée du Crédit (mois):</label>
-      <input type="number" [(ngModel)]="client.dureeCredit" name="duree" required>
-    </div>
+    <label>Montant Crédit:</label>
+    <input type="number" [(ngModel)]="formData.Montant_Credit" name="Montant_Credit" required>
     
-    <div class="form-group">
-      <label>Âge:</label>
-      <input type="number" [(ngModel)]="client.age" name="age" required>
-    </div>
+    <label>Durée Crédit:</label>
+    <input type="number" [(ngModel)]="formData.Duree_Credit" name="Duree_Credit" required>
     
-    <div class="form-group">
-      <label>Statut d'Emploi:</label>
-      <select [(ngModel)]="client.statutEmploi" name="statutEmploi" required>
-        <option value="CDI">CDI</option>
-        <option value="CDD">CDD</option>
-        <option value="Indépendant">Indépendant</option>
-        <option value="Sans emploi">Sans emploi</option>
-      </select>
-    </div>
+    <label>Statut Emploi:</label>
+    <select [(ngModel)]="formData.Statut_Emploi" name="Statut_Emploi">
+      <option value="CDI">CDI</option>
+      <option value="CDD">CDD</option>
+      <option value="Indépendant">Indépendant</option>
+      <option value="Sans emploi">Sans emploi</option>
+    </select>
     
-    <!-- <div class="form-group">
-      <label>Historique de Crédit (Ratio):</label>
-      <input type="number" step="0.01" [(ngModel)]="client." name="historique" required>
-    </div> -->
+    <label>Nombre Total de Crédits:</label>
+    <input type="number" [(ngModel)]="formData.Nbr_Total_Credits" name="Nbr_Total_Credits" required>
     
-    <button type="submit">Vérifier la Décision</button>
+    <label>Nombre de Crédits Payés:</label>
+    <input type="number" [(ngModel)]="formData.Nbr_Credits_Payes" name="Nbr_Credits_Payes" required>
+    
+    <label>Nombre de Crédits Non Payés:</label>
+    <input type="number" [(ngModel)]="formData.Nbr_Credits_NonPayes" name="Nbr_Credits_NonPayes" required>
+    
+    <button type="submit">Envoyer</button>
   </form>
-  
-  <div *ngIf="decision !== null">
-    <h3>Résultat:</h3>
-    <p [ngClass]="{'accepted': decision === 'Accepté', 'rejected': decision === 'Refusé'}">{{ decision }}</p>
+
+  <div *ngIf="result">
+    <h3>Résultats :</h3>
+    <p><strong>Historique Crédit:</strong> {{ result.Historique_Credit }}</p>
+    <p><strong>Score Global:</strong> {{ result.Score_Global }}</p>
+    <p><strong>Décision:</strong> {{ result.Decision_Credit }}</p>
   </div>
 </div>
