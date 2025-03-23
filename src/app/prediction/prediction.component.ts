@@ -42,7 +42,7 @@ export class PredictionComponent {
           title: `Décision : ${response.Decision_Credit}`,
           html: `
             <p><strong>Historique Crédit :</strong> ${response.Historique_Credit == '1' ? 'bon' : 'mauvais'}</p>
-            <p><strong>Score Global :</strong> ${response.Score_Global}</p>
+            <p><strong>Probabilité de solvabilité :</strong> ${response.Score_Global}</p>
           `
         });
       },
