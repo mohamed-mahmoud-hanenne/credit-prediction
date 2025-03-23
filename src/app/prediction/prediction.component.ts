@@ -32,6 +32,7 @@ export class PredictionComponent {
     this.http.post<{ Decision_Credit: string }>('https://projet-stocha.onrender.com/predict', this.formData)
       .subscribe(
         (response) => {
+          this.result = response;
           if (response.Decision_Credit === "acceptée") {
             Swal.fire({
               icon: 'success',
