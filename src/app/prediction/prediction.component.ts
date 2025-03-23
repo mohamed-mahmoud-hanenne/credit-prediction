@@ -28,15 +28,34 @@ export class PredictionComponent {
 
   constructor(private http: HttpClient) {}
 
+
+
   onSubmit() {
-    this.http.post('https://projet-stocha.onrender.com/predict', this.formData).subscribe(
+    this.http.post<{ Historique_Credit: string, Score_Global: number, Decision_Credit: string }>(
+      'https://projet-stocha.onrender.com/predict',
+      this.formData,
+      { headers: { 'Content-Type': 'application/json' } } // Ajoute ceci pour éviter l'erreur 415
+    ).subscribe(
       (response) => {
-        this.result = response;
+        Swal.fire({
+          icon: response.Decision_Credit.toLowerCase() === "accepté" ? 'success' : 'error',
+          title: `Décision : ${response.Decision_Credit}`,
+          html: `
+            <p><strong>Historique Crédit :</strong> ${response.Historique_Credit}</p>
+            <p><strong>Score Global :</strong> ${response.Score_Global}</p>
+          `
+        });
       },
       (error) => {
         console.error('Erreur lors de la requête API', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Une erreur est survenue lors de la requête.'
+        });
       }
     );
   }
+  
 
 }
