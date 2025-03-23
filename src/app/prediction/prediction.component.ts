@@ -41,7 +41,7 @@ export class PredictionComponent {
           icon: response.Decision_Credit.toLowerCase() === "accepté" ? 'success' : 'error',
           title: `Décision : ${response.Decision_Credit}`,
           html: `
-            <p><strong>Historique Crédit :</strong> ${response.Historique_Credit}</p>
+            <p><strong>Historique Crédit :</strong> ${response.Historique_Credit == '1' ? 'bon' : 'mauvais'}</p>
             <p><strong>Score Global :</strong> ${response.Score_Global}</p>
           `
         });
