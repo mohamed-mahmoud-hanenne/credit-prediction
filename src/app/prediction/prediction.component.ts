@@ -28,7 +28,7 @@ export class PredictionComponent {
   constructor(private http: HttpClient) {}
 
   onSubmit() {
-    this.http.post('http://localhost:5000/predict', this.formData).subscribe(
+    this.http.post('https://projet-stocha.onrender.com', this.formData).subscribe(
       (response) => {
         this.result = response;
       },
