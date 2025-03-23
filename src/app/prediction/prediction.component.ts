@@ -29,34 +29,14 @@ export class PredictionComponent {
   constructor(private http: HttpClient) {}
 
   onSubmit() {
-    this.http.post<{ Decision_Credit: string }>('https://projet-stocha.onrender.com/predict', this.formData)
-      .subscribe(
-        (response) => {
-          this.result = response;
-          if (response.Decision_Credit === "acceptée") {
-            Swal.fire({
-              icon: 'success',
-              title: 'Succès',
-              text: 'La demande a été acceptée !'
-            });
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Refusé',
-              text: 'Désolé, la demande a été refusée.'
-            });
-          }
-        },
-        (error) => {
-          console.error('Erreur lors de la requête API', error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Erreur',
-            text: 'Une erreur est survenue lors de la requête.'
-          });
-        }
-      );
+    this.http.post('https://projet-stocha.onrender.com/predict', this.formData).subscribe(
+      (response) => {
+        this.result = response;
+      },
+      (error) => {
+        console.error('Erreur lors de la requête API', error);
+      }
+    );
   }
-  
 
 }
