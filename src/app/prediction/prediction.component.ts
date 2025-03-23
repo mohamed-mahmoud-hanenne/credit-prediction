@@ -29,10 +29,10 @@ export class PredictionComponent {
   constructor(private http: HttpClient) {}
 
   onSubmit() {
-    this.http.post<{ decision: string }>('https://projet-stocha.onrender.com/predict', this.formData)
+    this.http.post<{ Decision_Credit: string }>('https://projet-stocha.onrender.com/predict', this.formData)
       .subscribe(
         (response) => {
-          if (response.decision === "acceptée") {
+          if (response.Decision_Credit === "acceptée") {
             Swal.fire({
               icon: 'success',
               title: 'Succès',
